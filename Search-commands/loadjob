@@ -1,0 +1,6 @@
+
+loadjob: loadjob command loads events or results of a previously completed search job. The artifacts to load are identified either by the search job id <sid> or a scheduled search name and the time range of the current search. If a saved search name is provided and multiple artifacts are found within that range, the latest artifacts are loaded.
+
+
+Benefit: You can load your old search results and work on that. That means if you want to add some more filters to previous search result then you need not to run the new search, instead you can load or call the previous completed search / or saved search results and then add you filters on top of that.
+
