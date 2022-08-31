@@ -11,6 +11,6 @@ Benefit: You can load your old search results and work on that. That means if yo
 
 |loadjob savedsearch="<user>:<>:thruput-details"
 
-# Refferences : 
+# References  : 
 
 https://docs.splunk.com/Documentation/SplunkCloud/8.2.2203/SearchReference/Loadjob
