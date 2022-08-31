@@ -1,66 +1,14 @@
+loadjob: loadjob command (it comes under generating commands category) loads events or results of a previously completed search job. you can load the results in two way
 
-loadjob: loadjob command loads events or results of a previously completed search job. The artifacts to load are identified either by the search job id <sid> or a scheduled search name and the time range of the current search. If a saved search name is provided and multiple artifacts are found within that range, the latest artifacts are loaded.
+1> by specifying the search job id <sid> or a 
+2> by specifying the scheduled search name and the time range of the current search. If a saved search name is provided and multiple results are found within that range, the latest result will be loaded.
 
+index=_internal sourcetype=splunkd group=* component=* thread=* | table _time group component thread 
 
 Benefit: You can load your old search results and work on that. That means if you want to add some more filters to previous search result then you need not to run the new search, instead you can load or call the previous completed search / or saved search results and then add you filters on top of that.
 
-loadjob
-Description
-Loads events or results of a previously completed search job. The artifacts to load are identified either by the search job id <sid> or a scheduled search name and the time range of the current search. If a saved search name is provided and multiple artifacts are found within that range, the latest artifacts are loaded.
+|loadjob <sid>
 
-You cannot run the loadjob command on ad hoc or real-time searches.
-
-Syntax
-The required syntax is in bold.
-
-| loadjob
-(<sid> | <savedsearch>)
-[<result-event>]
-[<delegate>]
-[<artifact_offset>]
-[<ignore_running>]
-Required arguments
-You must specify either sid or savedsearch.
-
-sid
-Syntax: <string>
-Description: The search ID of the job whose artifacts need to be loaded, for example: 1233886270.2. You can locate the sid through the Job Inspector or the addinfo command.
-savedsearch
-
-Syntax: savedsearch="<user-string>:<app-string>:<search-name-string>"
-Description: The unique identifier of a saved search whose artifacts need to be loaded. A saved search is uniquely identified by the triplet {user, app, savedsearch name}, for example: savedsearch="admin:search:my Saved Search" There is no method to specify a wildcard or match-all behavior. All portions of the triplet must be provided.
-Optional arguments
-
-result-event
-Syntax: events=<bool>
-Description: events=true loads events, while events=false loads results.
-Defaults: false
-
-delegate
-Syntax: job_delegate=<string>
-Description: When specifying a saved search, this option selects jobs that were started by the given user. Scheduled jobs will be run by the delegate "scheduler". Dashboard-embedded searches are run in accordance with the saved search's dispatchAs parameter, typically the owner of the search.
-Defaults: scheduler
-
-artifact_offset
-Syntax: artifact_offset=<int>
-Description: Selects a search artifact other than the most recent matching one. For example, if artifact_offset=1, the second most recent artifact will be used. If artifact_offset=2, the third most recent artifact will be used. If artifact_offset=0, selects the most recent. A value that selects past all available artifacts will result in an error.
-Default: 0
-
-ignore_running
-Syntax: ignore_running=<bool>
-Description: Skip over artifacts whose search is still running.
-Default: true
-Usage
-The loadjob command is an event-generating command. See Command types.
-
-Generating commands use a leading pipe character and should be the first command in a search.
-
-The loadjob command can be used for a variety of purposes, but one of the most useful is to run a fairly expensive search that calculates statistics. You can use loadjob searches to display those statistics for further aggregation, categorization, field selection and other manipulations for charting and display.
-
-After a search job has completed and the results are cached, you can use this command to access or load the results.
-
-Search head clusters
-A search head cluster can run the loadjob command only on scheduled saved searches. A search head cluster runs searches on results or artifacts that the search head cluster replicates.
-
+|loadjob savedsearch="<user>:<>:thruput-details"
 
 Refference: https://docs.splunk.com/Documentation/SplunkCloud/8.2.2203/SearchReference/Loadjob
